@@ -1,5 +1,4 @@
 {% set version = '0.2.0' %}
-
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,35 +9,35 @@ package:
 source:
   fn: assertthat_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/assertthat_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/assertthat/assertthat_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/assertthat_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/assertthat/assertthat_{{ version }}.tar.gz
   sha256: d73ef79b1e75293ed889a99571b237a95829c099f7da094d4763f83ea6fde5f2
 
 build:
-  number: 0
+  merge_build_host: True  # [win]
+  number: 1
   skip: true  # [win32]
-
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
+    - {{posix}}zip               # [win]
+  host:
     - r-base
-
   run:
     - r-base
 
 test:
   commands:
-    - $R -e "library('assertthat')"  # [not win]
+    - $R -e "library('assertthat')"           # [not win]
     - "\"%R%\" -e \"library('assertthat')\""  # [win]
 
 about:
   home: https://CRAN.R-project.org/package=assertthat
   license: GPL-3
-  summary: |
-    assertthat is an extension to stopifnot() that makes it easy to declare the pre and
+  summary: assertthat is an extension to stopifnot() that makes it easy to declare the pre and
     post conditions that you code should satisfy, while also producing friendly error
     messages so that your users know what they've done wrong.
   license_family: GPL3
@@ -51,3 +50,4 @@ extra:
     - bgruening
     - daler
     - jdblischak
+    - cbrueffer
