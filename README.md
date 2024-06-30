@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-assertthat-fe
 
 Home: https://CRAN.R-project.org/package=assertthat
 
-Package license: GPL-3
+Package license: GPL-3.0-only
 
 Summary: assertthat is an extension to stopifnot() that makes it easy to declare the pre and post conditions that you code should satisfy, while also producing friendly error messages so that your users know what they've done wrong.
 
